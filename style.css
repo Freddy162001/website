@@ -715,3 +715,14 @@ font-size: 1.8rem;
       body.light-mode .navbar a {
         color: black; /* Change text color to black */
       }
+
+      @media(max-width:1285px) {
+        body.light-mode .navbar {
+          background: rgba(240, 240, 240, 0.8); /* Lighter background for the hamburger menu in light mode */
+        }
+      }
+      @media(max-width: 768px) { /* Adjust the max-width as needed for your mobile breakpoint */
+        .custom-cursor {
+            display: none; /* Hide the custom cursor on mobile */
+        }
+    }
