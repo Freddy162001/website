@@ -10,6 +10,27 @@
   }
 }
 
+@keyframes levitate {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes cursorGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -17,6 +38,7 @@
   text-decoration: none;
   scroll-behavior: smooth;
   font-family: "Poppins";
+  cursor: none !important;
 }
 :root {
   --bg-color: #000000;
@@ -24,15 +46,19 @@
   --text-color: white;
   --main-color: #ff12ff;
   --logo-hover:#DF8908;
+  --bubble-color: rgba(223, 137, 8, 0.1);
 }
 html {
   font-size: 60%;
   overflow-x: hidden;
 }
-body{
+body {
   background: var(--bg-color);
-  color : var(var(--text-color));
+  position: relative;
+  overflow-x: hidden;
+  color: var(--text-color);
 }
+
 .header{
   position: fixed;
   width: 100%;
@@ -57,9 +83,12 @@ body{
   font-weight: 800;
   cursor:pointer;
   transition: 0.3s ease-in-out;
+  display: inline-block;
+  animation: levitate 3s ease-in-out infinite;
 }
 .logo:hover{
   transform: scale(1.1);
+  animation-play-state: paused;
 }
 span{
   background : linear-gradient(
@@ -224,7 +253,7 @@ background: var(--bg-color);
 
 
 .about-img img{
-width: 32vw;
+width: 20vw;
 border: 50%;
 transition: 0.4s ease-in-out;
 }
@@ -239,7 +268,8 @@ font-size: 1.8rem;
 }
 
 ::-webkit-scrollbar{
-  width: 15px;
+  background-color: transparent;
+  width : 15px;
 }
   
 ::-webkit-scrollbar-thumb{
@@ -248,10 +278,11 @@ font-size: 1.8rem;
     #DF8908,
     #ff12ff
   );
+}
 ::-webkit-scrollbar-track{
   background-color: var(--bg-color);
 }
-}
+
 .heading{
   text-align: center;
   font-size: 7rem;
@@ -337,7 +368,7 @@ font-size: 1.8rem;
       justify-content: center;
       text-align: center;
       
-      background-color: var( --bg-color);
+      background-color: black; /* Change background to black */
       border: 2px solid var( --main-color);
       border-radius: 3rem;
       gap: 2rem;
@@ -349,7 +380,7 @@ font-size: 1.8rem;
       }
       .project-card:hover{
         box-shadow: 0 0 25px var( --main-color),
-        0 0 50px var( -- \main-color);
+        0 0 50px var( --main-color);
         transform: scale(1.02);
       }
         .project-card img{
@@ -492,4 +523,195 @@ font-size: 1.8rem;
         .about img{
           width: 52vw;
         }
+      }
+
+      /* Cursor styles */
+      body, a, button, input, textarea, 
+      .service-box, .service-box:hover, 
+      .service-box *, .service-box:hover * {
+        cursor: none !important;
+      }
+      
+      .custom-cursor {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        background: linear-gradient(45deg, #DF8908, #ff12ff, #DF8908);
+        background-size: 200% 200%;
+        animation: cursorGradient 3s ease infinite;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 10px rgba(223, 137, 8, 0.5);
+      }
+      
+      .bubble {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(223, 137, 8, 0.4));
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        animation: bubble-rise 3s ease-in forwards;
+      }
+
+      @keyframes bubble-rise {
+        0% { 
+          opacity: 0.8; 
+          transform: translateY(0) scale(1); 
+        }
+        100% { 
+          opacity: 0; 
+          transform: translateY(-100px) scale(0.5); 
+        }
+      }
+
+      #bubble-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9998;
+      }
+
+      /* Light mode styles */
+      body.light-mode {
+        --bg-color: #f0f0f0;
+        --second-bg-color: #e0e0e0;
+        --text-color: #333333;
+      }
+
+      body.light-mode .header {
+        background-color: rgba(240, 240, 240, 0.3);
+      }
+
+      body.light-mode .service-box {
+        background-color: var(--main-color);
+        color: var(--text-color);
+      }
+
+      body.light-mode .service-box:hover {
+        background: var(--second-bg-color);
+        color: var(--main-color);
+      }
+
+      body.light-mode .project-card {
+        background-color: black; /* Set background to black in light mode */
+        color: var(--text-color); /* Ensure text color is appropriate */
+      }
+
+      body.light-mode .footer {
+        background-color: #f0f0f0; /* Set footer background to match light mode background */
+      }
+
+      body.light-mode .copyright {
+        color: var(--text-color);
+        background-color: var(--second-bg-color);
+      }
+
+      body.light-mode .about {
+        background-color: var(--bg-color);
+      }
+
+      body.light-mode .services {
+        background-color: var(--bg-color);
+      }
+
+      body.light-mode .heading {
+        color: black;
+      }
+
+      body.light-mode .contact h2 {
+        color: black;
+      }
+
+      body.light-mode ::-webkit-scrollbar-track {
+        background-color: transparents;
+      }
+
+      .theme-switch-container {
+        display: flex;
+        align-items: center;
+        margin-left: 20px; /* Space between navbar and switch */
+      }
+
+      .theme-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        margin: 0 10px; /* Space between icons and switch */
+      }
+
+      .theme-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #6a0dad; /* Dark mode background */
+        transition: .4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: orange; /* Light mode background when checked */
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(26px);
+      }
+
+      /* Light mode styles for the slider */
+      body.light-mode .slider {
+        background-color: orange; /* Light mode background */
+      }
+
+      body.light-mode input:checked + .slider {
+        background-color: #ff12ff; /* Change to your desired color in light mode */
+      }
+
+      /* Icon styles */
+      #moon-icon {
+        color: purple; /* Moon icon color in dark mode */
+        font-size: 2rem; /* Increase size */
+      }
+
+      #sun-icon {
+        color: orange; /* Sun icon color in light mode */
+        font-size: 2rem; /* Increase size */
+      }
+
+      /* Light mode styles */
+      body.light-mode .navbar {
+        background: rgba(0, 0, 0, 0); /* Lighter background for the hamburger menu */
+      }
+
+      body.light-mode .navbar a {
+        color: black; /* Change text color to black */
       }
