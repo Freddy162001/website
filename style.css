@@ -875,3 +875,8 @@ font-size: 1.8rem;
         justify-content: center; /* Center the service boxes */
       }
     }
+    @media(max-width: 768px) { /* Adjust the max-width as needed for your mobile breakpoint */
+      .cloud-icon {
+        display: none; /* Hide the cloud icon on mobile */
+      }
+    }
